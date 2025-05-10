@@ -1,4 +1,4 @@
 #Ignorar archivos HTML
 *.HTML
 #Ignorar carpetas de output
-output/
+build/
