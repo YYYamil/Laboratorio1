@@ -32,3 +32,7 @@ clean:
 # Información
 info:
 	@echo "OBJ_FILES = $(OBJ_FILES)"
+
+# Generar documentación con Doxygen
+doc:
+	doxygen doxyfile
