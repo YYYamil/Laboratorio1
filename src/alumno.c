@@ -59,41 +59,37 @@ static int SerializarNumero(const char campo[], uint32_t valor, char buffer[], u
 /* === Public function definitions ============================================================================== */
 
 int Serializar(const alumno_t alumno, char buffer[], uint32_t size) {
-    int escritos = 0; // total de caracteres escritos
-    int resultado;
+    int escritos = 0;
+    int resultado = 0;
 
-    buffer[0] = '{';
-    buffer++;
-    escritos = 1;
+    buffer[escritos++] = '{';
+
     resultado = SerializarCadena("Nombre", alumno->nombre, buffer + escritos, size - escritos);
-
     if (resultado < 0) {
-        return -1; // si no nos alcanza el espacio
+        return -1;  //nos quedamos sin espacio
     }
+    escritos += resultado;
 
-    buffer[resultado] = ',';
-    buffer++;
-    buffer = buffer + resultado;
-    escritos = escritos + resultado;
-    escritos += SerializarCadena("Apellido", alumno->apellido, buffer, size - escritos);
-
+    resultado = SerializarCadena("Apellido", alumno->apellido, buffer + escritos, size - escritos);
     if (resultado < 0) {
-        return -1; // si no nos alcanza el espacio
+        return -1;  //nos quedamos sin espacio
     }
-    buffer++;
-    buffer[resultado] = ',';
-    buffer++;
-    buffer = buffer + resultado;
-    escritos = escritos + resultado;
-    escritos = SerializarNumero("Documento", alumno->documento, buffer, size - escritos);
+    escritos += resultado;
 
+    resultado = SerializarNumero("Documento", alumno->documento, buffer + escritos, size - escritos);
     if (resultado < 0) {
-        return -1; // si no nos alcanza el espacio
+        return -1;  //nos quedamos sin espacio
     }
-    buffer++;
-    buffer[resultado] = '}';
+    escritos += resultado;
+
+    
+    buffer[escritos++] = '"';   
+    buffer[escritos++] = '}';   // fin del json
+    //buffer[escritos] = '\0';    // terminamos la cadena
 
     return escritos;
 }
 
-/* === End of documentation ======================================================================================== */
+
+ /*=== End of documentation ======================================================================================== */
+ 
