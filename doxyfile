@@ -1,7 +1,7 @@
 # Archivo de configuración básico para Doxygen
 
 # Nombre del proyecto
-PROJECT_NAME           = "Laboratorio1"
+PROJECT_NAME           = "Laboratorio E IV"
 
 # Directorio donde se genera la documentación
 OUTPUT_DIRECTORY       = doc
