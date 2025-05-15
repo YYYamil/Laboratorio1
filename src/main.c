@@ -32,11 +32,6 @@ SPDX-License-Identifier: MIT
 /* === Private function declarations =============================================================================== */
 
 /* === Private variable definitions ================================================================================ */
-static const struct alumno_s YO = { // CONST para ir a flash, STATIC para que sea privada le paso un puntero
-    .nombre = "Yamil",
-    .apellido = "Tolaba",
-    .documento = 11222333
-};
 
 /* === Public variable definitions ================================================================================= */
 
@@ -46,12 +41,26 @@ static const struct alumno_s YO = { // CONST para ir a flash, STATIC para que se
 int main(void) {
     char buffer[100]; // es un arreglo de 100 y puedo saber el tamaño
     int resultado;
-    resultado = Serializar(&YO, buffer, sizeof(buffer));
 
-    if (resultado > 0) {
-        printf("Serializado: %s\n", buffer);
-    } else{
-        printf("Error al Serializar: %s\n", buffer);
+    alumno_t esteban = CrearAlumno("Esteban", "Volentini", 12345678);
+    alumno_t yamil = CrearAlumno("Yamil", "Tolaba", 10200300);
+    /*
+    // Verificamos si se pudieron crear los alumnos
+    if (alumno1 == NULL || alumno2 == NULL) {
+        printf("Error: No se pudo crear uno o ambos alumnos.\n");
+        return 1;
     }
+    */
+    // Serializamos los datos del segundo alumno en formato JSON
+    resultado = SerializarAlumno(yamil, buffer, sizeof(buffer));
+
+    // Mostramos el resultado de la serialización
+    if (resultado > 0) {
+        printf("Datos del alumno en JSON: %s\n", buffer);
+    } else {
+        printf("Error al serializar los datos del alumno.\n");
+    }
+
+    return 0;
 }
 /* === End of documentation ======================================================================================== */
