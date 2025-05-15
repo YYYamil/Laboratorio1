@@ -38,31 +38,36 @@ extern "C" {
 
 /* === Public data type declarations =============================================================================== */
 
-//! Estructura que representa un alumno
-typedef struct alumno_s {
-    char nombre[20];    //!< Nombre del alumno
-    char apellido[20];  //< Apellido del alumno
-    uint32_t documento; //< Documento del alumno
-} const * alumno_t;
+//! Puntero que representa un alumno
+typedef struct alumno_s * alumno_t; // para usar directamente "alumno_t" es algo del tipo alumno
 
 /* === Public variable declarations ================================================================================ */
 
 /* === Public function declarations ================================================================================ */
+/**
+ * @brief Funcion para crear un alumno
+ * 
+ * @param nombre Nombre del alumno
+ * @param apellido Apellido del alumno
+ * @param documento Documento del alumno
+ * @return alumno_t Puntero a la estructura con los datos del alumno
+ */
+alumno_t CrearAlumno(char nombre[], char apellido[], int documento);
 
 /**
- * @brief Funcion para serializar los datos de un alumno
- *
- * @param alumno Puntero a la estructura con los datos del alumno
- * @param buffer cadena de caracteres donde se almacenara los datos serializados
- * @param disponibles espacio disponible en la cadena de caracteres
- * @return int cantidad de caracteres escritos en la cadena de resultado o -1 si hubo error
+ * @brief Funcion para la serialiacion de datos en un json
+ * 
+ * @param alumno Puntero a una estructura del tipo alumno
+ * @param buffer Cadena de caracteres
+ * @param size Espacio discponible
+ * @return int Retorna -1 si no es posible generar la cadena
  */
-int Serializar(alumno_t alumno, char buffer[], uint32_t disponibles);
+int SerializarAlumno(alumno_t alumno, char buffer[], uint32_t size);
 
 /* === End of conditional blocks =================================================================================== */
 
 #ifdef __cplusplus
 }
 #endif
-
+ 
 #endif /* ALUMNO_H_ */
