@@ -44,15 +44,9 @@ int main(void) {
 
     alumno_t esteban = CrearAlumno("Esteban", "Volentini", 12345678);
     alumno_t yamil = CrearAlumno("Yamil", "Tolaba", 10200300);
-    /*
-    // Verificamos si se pudieron crear los alumnos
-    if (alumno1 == NULL || alumno2 == NULL) {
-        printf("Error: No se pudo crear uno o ambos alumnos.\n");
-        return 1;
-    }
-    */
-    // Serializamos los datos del segundo alumno en formato JSON
-    resultado = SerializarAlumno(yamil, buffer, sizeof(buffer));
+    
+    // Serializamos los datos del alumno en formato JSON
+    resultado = SerializarAlumno(esteban, buffer, sizeof(buffer));
 
     // Mostramos el resultado de la serialización
     if (resultado > 0) {

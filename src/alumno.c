@@ -42,15 +42,17 @@ struct alumno_s {   //debe ser el mismo struct de alumno.h
     char apellido [20];     //!< Apellido del alumno
     int documento;          //!< Documento del alumno
 #ifdef USAR_MEMORIA_ESTATICA
-    bool ocupado;           //!< Indica si una instancia está ocupada (solo para Memoria Estática)
+    bool ocupado;           //!< Para Memoria Estatica indica si una instancia está ocupada
 #endif
 };
 
 /* === Private function declarations =============================================================================== */
 
+static alumno_t CrearAlumnoEstatico();
+
 /**
  * @brief Inserta en un buffer un campo de objeto JSON tipo cadena.
- * @warning Si el valor retornado es mayor a size-1 la cadena fue truncada
+ *
  * @param[in] campo Nombre del campo
  * @param[in] valor Valor de la cadena
  * @param[in] buffer Puntero a memoria de destino
@@ -60,15 +62,24 @@ struct alumno_s {   //debe ser el mismo struct de alumno.h
  */
 static int SerializarCadena(char campo[], char valor[], char buffer[], uint32_t size);
 
+/**
+ * @brief Devuelve un json de cadena valor
+ * 
+ * @param campo Cadena de caracteres
+ * @param valor Entero que recibe el valor
+ * @param buffer Cadena donde se escribe la serializacion
+ * @param size Lugares disponibles en la cadena
+ * @return int Devolvera -1 si no hay espacios suficientes
+ */
 static int SerializarEntero(char campo[], int valor, char buffer[], uint32_t size);
 
-static alumno_t CrearAlumnoEstatico();
+
 /* === Private variable definitions ================================================================================ */
 
 
 #ifdef USAR_MEMORIA_ESTATICA
 //! Arreglo de alumnos para cuando se usa Memoria Estática
-static struct alumno_s arreglo_alumnos[MAX_CANT_ALUMNOS] = {0}; //! Inicialmente, todo en 0. Si se crea el i-ésimo alumno, los campos de arreglo_alumnos[i] NO serán 0
+static struct alumno_s arreglo_alumnos[MAX_CANT_ALUMNOS] = {0}; //! Comienza en 0
 #endif
 
 /* === Public variable definitions ================================================================================= */

@@ -44,9 +44,24 @@ typedef struct alumno_s * alumno_t; // para usar directamente "alumno_t" es algo
 /* === Public variable declarations ================================================================================ */
 
 /* === Public function declarations ================================================================================ */
-
+/**
+ * @brief Funcion para crear un alumno
+ * 
+ * @param nombre Nombre del alumno
+ * @param apellido Apellido del alumno
+ * @param documento Documento del alumno
+ * @return alumno_t Puntero a la estructura con los datos del alumno
+ */
 alumno_t CrearAlumno(char nombre[], char apellido[], int documento);
 
+/**
+ * @brief Funcion para la serialiacion de datos en un json
+ * 
+ * @param alumno Puntero a una estructura del tipo alumno
+ * @param buffer Cadena de caracteres
+ * @param size Espacio discponible
+ * @return int Retorna -1 si no es posible generar la cadena
+ */
 int SerializarAlumno(alumno_t alumno, char buffer[], uint32_t size);
 
 /* === End of conditional blocks =================================================================================== */
